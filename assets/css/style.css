@@ -1,0 +1,33 @@
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.h_score {
+    height: 25px;
+    width: 75px;
+    background-color: yellow;
+}
+
+.time {
+    height: 25px;
+    width: 75px;
+    background-color: green;
+}
+
+section div {
+    /* padding-top: 50px; */
+    text-align: center;
+    margin: 50px auto;
+    height: 500px;
+    width: 750px;
+    background-color: gold;
+}
+
+
+
+.cnt_title {
+    margin-top: 45px;
+    font-size: 55px;
+    color:blueviolet;
+}
