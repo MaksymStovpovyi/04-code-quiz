@@ -1,10 +1,12 @@
 let cnt = document.getElementById('cnt');
-let timeLeft = document.getElementById('time');
+let elemTime = document.getElementById('time');
 
 let className = 'class ="cnt_title"';
 let pageIs = 'start';
-let totalTime = 3;
+let totalTime = 30;
 let leftTime = totalTime;
+let finalScore;
+
 
 let pageStart = `
     <h2 `+ className + `>Coding Quiz Challenge</h2>
@@ -57,7 +59,7 @@ let qstn5 = `
 
 let allDone = `
     <h2 `+ className + `>All done!</h2>
-    <p>some text</p><br>
+    <p>Your final score is <span id="yourScore"></span></p><br>
 
     <form name="initials">
     
@@ -70,6 +72,7 @@ let allDone = `
 
 let hiScore = `
     <h2 `+ className + `>hi score</h2>
+    <ul id="score-list"></ul>
     <button class="btn">Go back</button><br>
     <button class="btn">Clear score</button>
 `;
@@ -80,17 +83,49 @@ runPage(pageStart); // start function
 function runPage (page) {
     cnt.innerHTML = page;
     console.log(pageIs);
-    
+
+    //timer start
+    if (pageIs == 'qstn1') {
+
+        let myTimer = setInterval(() => {
+
+            if (pageIs === "allDone") {
+                clearInterval(myTimer);
+                finalScore = leftTime;
+                elemTime.innerHTML = leftTime;
+                let yourScore = document.getElementById('yourScore');
+                yourScore.innerHTML = leftTime;
+
+
+                console.log('finalScore ' + finalScore);
+
+            } else if (leftTime >= 0) {
+                console.log(leftTime);
+                elemTime.innerHTML = leftTime;
+                --leftTime;
+
+            } else {
+                clearInterval(myTimer);
+                elemTime.innerHTML = '';
+            }   
+        }, 1000);
+    }
+
+    //HiScore
+    if (pageIs == 'hiScore') {
+///// ----> STOP HERE - creat li for <ul></ul>
+    }
+
+
+    //Listener for buttons 
     let btn = document.getElementsByClassName('btn');
     
-    for(let i = 0; i < btn.length; i++) {
+    for (let i = 0; i < btn.length; i++) {
         btn[i].addEventListener('click', (e) => {
             e.preventDefault();
 
             if (pageIs === 'start') {
 
-                timer();//start timer
-                
                 pageIs = "qstn1";
                 runPage(qstn1);
 
@@ -124,19 +159,34 @@ function runPage (page) {
                 pageIs = "allDone";
                 runPage(allDone);
 
+                
+
             } else if (pageIs === 'allDone') {
 
                 let form = document.forms.initials;
                 let elem = form.elements.text;
-                console.log(elem.value);
+                let fromForm = [[elem.value, finalScore]];
 
-                ///
-                localStorage.setItem('key', 'pop');
+                console.log(elem.value + " " + finalScore);
+                
+                if (localStorage.hiScore) {
+
+                    let fromLS = JSON.parse(localStorage.getItem('hiScore'));
+
+                    fromLS.unshift(fromForm);
+
+                    localStorage.setItem('hiScore', JSON.stringify(fromLS));
+
+                } else {
+                    localStorage.setItem('hiScore', JSON.stringify(fromForm));
+                }
 
                 pageIs = "hiScore";
                 runPage(hiScore);
 
             } else if (pageIs === 'hiScore') {
+
+                leftTime = totalTime;
                 pageIs = "start";
                 runPage(pageStart);
             }
@@ -146,25 +196,9 @@ function runPage (page) {
     
 }
 
-//timer
-function timer() {
-    let myTimer = setInterval(() => {
-        if (leftTime >= 0) {
-            console.log(leftTime);
-            timeLeft.innerHTML = leftTime;
-            leftTime--;
-        } else {
-            clearInterval(myTimer);
-            timeLeft.innerHTML = '';
-            //runPage(allDone);
-            leftTime = totalTime;
-        }   
-    }, 1000);
-}
-
 // DROP
 function drop(answer, trueAnswer) {
-    if (answer != trueAnswer) {
+    if (answer != trueAnswer && leftTime > 4) {
         leftTime -= 5;
     }
 }
