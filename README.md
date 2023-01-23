@@ -4,7 +4,7 @@
 
 This repository is homework of Maksym Stovpovyi
 
-[Link to deployed application]()
+[Link to deployed application](https://maksymstovpovyi.github.io/04-code-quiz/)
 
 The following image shows the web application's appearance and functionality:
 
