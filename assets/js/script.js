@@ -1,79 +1,102 @@
 let cnt = document.getElementById('cnt');
 let elemTime = document.getElementById('time');
-
-let className = 'class ="cnt_title"';
+ 
 let pageIs = 'start';
-let totalTime = 60;
+let totalTime = 6000;
 let leftTime = totalTime;
 let finalScore;
 
 let pageStart = `
-    <h2 `+ className + `>Coding Quiz Challenge</h2>
+    <h2 class ="cnt_title" >Coding Quiz Challenge</h2>
     <p>
     Try to answer the following code-related questions within the time limit <br>
-    Keep in mind that incorrect answers will penalize your score/time by top seconds!
+    Keep in mind that incorrect answers will penalize your score/time<br> by top seconds!
     </p>
-    <button class="btn">Start Quiz</button>
+    <button class="btn btn_start" btn_start>Start Quiz</button>
 `;
 // 3
 let qstn1 = `
-    <h2 `+ className + `>Q1 Commonly used data types DO Not Include:</h2>
-    <button class="btn" data-answer="a1">1. strings</button><br>
-    <button class="btn" data-answer="a2">2. booleans</button><br>
-    <button class="btn" data-answer="a3">3. alerts</button><br>
-    <button class="btn" data-answer="a4">4. numbers</button>
+    <h2 class ="cnt_title qstn_title" >Commonly used data<br> types DO Not Include:</h2>
+
+    <div class="qstn_wrapper">
+        <button class="btn" datqstn_titlea-answer="a1">1. strings</button><br>
+        <button class="btn" data-answer="a2">2. booleans</button><br>
+        <button class="btn" data-answer="a3">3. alerts</button><br>
+        <button class="btn" data-answer="a4">4. numbers</button>
+    <div>
+    <span class="answer"></span>
 `;
 // 2
 let qstn2 = `
-    <h2 `+ className + `>Q2 The condition in an if / else statement is enclosed with _______.</h2>
-    <button class="btn" data-answer="a1">1. quotes</button><br>
-    <button class="btn" data-answer="a2">2. curly brackets</button><br>
-    <button class="btn" data-answer="a3">3. parenthesis</button><br>
-    <button class="btn" data-answer="a4">4. square brackets</button>
+    <h2 class ="cnt_title qstn_title" >The condition in an if / else<br> statement is enclosed with _______.</h2>
+
+    <div class="qstn_wrapper">
+        <button class="btn" data-answer="a1">1. quotes</button><br>
+        <button class="btn" data-answer="a2">2. curly brackets</button><br>
+        <button class="btn" data-answer="a3">3. parenthesis</button><br>
+        <button class="btn" data-answer="a4">4. square brackets</button>
+    <div>
+    <span class="answer"></span>
 `;
 // 4
 let qstn3 = `
-    <h2 `+ className + `>Q3 Arrays in JavaScript can be used to store _______.</h2>
-    <button class="btn" data-answer="a1">1. numbers and strings</button><br>
-    <button class="btn" data-answer="a2">2. other arrays</button><br>
-    <button class="btn" data-answer="a3">3. booleans</button><br>
-    <button class="btn" data-answer="a4">4. all of the above</button>
+    <h2 class ="cnt_title qstn_title" >Arrays in JavaScript can<br> be used to store _______.</h2>
+
+    <div class="qstn_wrapper">
+        <button class="btn" data-answer="a1">1. numbers and strings</button><br>
+        <button class="btn" data-answer="a2">2. other arrays</button><br>
+        <button class="btn" data-answer="a3">3. booleans</button><br>
+        <button class="btn" data-answer="a4">4. all of the above</button>
+    <div>
+    <span class="answer"></span>
 `;
 // 3
 let qstn4 = `
-    <h2 `+ className + `>Q4 String values must be enclosed within _______ when being assigned to variables.</h2>
-    <button class="btn" data-answer="a1">1. commas</button><br>
-    <button class="btn" data-answer="a2">2. curly brackets</button><br>
-    <button class="btn" data-answer="a3">3. quotes</button><br>
-    <button class="btn" data-answer="a4">4. parenthesis</button>
-`;
+    <h2 class ="cnt_title qstn_title" >String values must be enclosed within<br> _______ when being assigned to variables.</h2>
+
+    <div class="qstn_wrapper">
+        <button class="btn" data-answer="a1">1. commas</button><br>
+        <button class="btn" data-answer="a2">2. curly brackets</button><br>
+        <button class="btn" data-answer="a3">3. quotes</button><br>
+        <button class="btn" data-answer="a4">4. parenthesis</button>
+    <div>
+    <span class="answer"></span>
+    `;
 // 4
 let qstn5 = `
-    <h2 `+ className + `>Q5 Avery useful tool used during development and debugging for printing content to the debugger is:</h2>
-    <button class="btn" data-answer="a1">1. JavaScript</button><br>
-    <button class="btn" data-answer="a2">2. terminal/bash</button><br>
-    <button class="btn" data-answer="a3">3. for loops</button><br>
-    <button class="btn" data-answer="a4">4. console.log</button>
+    <h2 class ="cnt_title qstn_title" >Avery useful tool used during development and debugging for printing content to the debugger is:</h2>
+
+    <div class="qstn_wrapper">
+        <button class="btn" data-answer="a1">1. JavaScript</button><br>
+        <button class="btn" data-answer="a2">2. terminal/bash</button><br>
+        <button class="btn" data-answer="a3">3. for loops</button><br>
+        <button class="btn" data-answer="a4">4. console.log</button>
+    <div></div>
+    <span class="answer"></span>
 `;
 
 let allDone = `
-    <h2 `+ className + `>All done!</h2>
-    <p>Your final score is <span id="yourScore"></span></p><br>
+    <div class="done_wrapper">
+        <h2 class ="cnt_title" >All done!</h2>
+        <p>Your final score is <span id="yourScore"></span></p><br>
 
-    <form name="initials">
-    
-        <label>Let's submit some text</label>
-        <input type="text" name="text" />
-        <input type="submit" value="Submit" class="btn"/>
+        <form name="initials">
+        
+            <label>Enter initials: </label>
+            <input type="text" name="text" />
+            <input type="submit" value="Submit" class="btn"/>
 
-    </form>
+        </form>
+    </div>
 `;
 
 let hiScore = `
-    <h2 `+ className + `>hi score</h2>
-    <ul id="score-list"></ul>
-    <button class="btn">Go back</button><br>
-    <button class="btn">Clear score</button>
+    <div class="list_wrapper">
+        <h2 class ="cnt_title" >High scores</h2>
+        <ul id="score-list"></ul>
+        <button class="btn">Go back</button>
+        <button class="btn">Clear score</button>
+    </div>
 `;
 
 runPage(pageStart); // start function
@@ -99,34 +122,47 @@ function runPage (page) {
             } else if (pageIs === 'qstn1') {
 
                 drop(btn[i].dataset.answer, 'a3');
-                pageIs = "qstn2";
-                runPage(qstn2);
-
+                
+                setTimeout(() => {
+                    pageIs = "qstn2";
+                    runPage(qstn2);
+                }, 1000);
+                
             } else if (pageIs === 'qstn2') {
 
                 drop(btn[i].dataset.answer, 'a2');
-                pageIs = "qstn3";
-                runPage(qstn3);
 
+                setTimeout(() => {
+                    pageIs = "qstn3";
+                    runPage(qstn3);
+                }, 1000);
+                
             } else if (pageIs === 'qstn3') {
 
                 drop(btn[i].dataset.answer, 'a4');
-                pageIs = "qstn4";
-                runPage(qstn4);
+
+                setTimeout(() => {
+                    pageIs = "qstn4";
+                    runPage(qstn4);
+                }, 1000);
 
             } else if (pageIs === 'qstn4') {
 
                 drop(btn[i].dataset.answer, 'a3');
-                pageIs = "qstn5";
-                runPage(qstn5);
+
+                setTimeout(() => {
+                    pageIs = "qstn5";
+                    runPage(qstn5);
+                }, 1000);
 
             } else if (pageIs === 'qstn5') {
 
                 drop(btn[i].dataset.answer, 'a4');
-                pageIs = "allDone";
-                runPage(allDone);
 
-                
+                setTimeout(() => {
+                    pageIs = "allDone";
+                    runPage(allDone);
+                }, 1000);
 
             } else if (pageIs === 'allDone') {
                 // name from form
@@ -159,7 +195,7 @@ function runPage (page) {
                 //for next page
                 } else if (e.target.textContent == 'Go back') {
                     leftTime = totalTime;
-                    elemTime.textContent = '';
+                    elemTime.textContent = '0';
                     pageIs = "start";
                     runPage(pageStart);
                 }
@@ -171,11 +207,23 @@ function runPage (page) {
 
 // DROP
 function drop(answer, trueAnswer) {
+
     if (answer != trueAnswer && leftTime > 4) {
         leftTime -= 5;
     } else if (answer != trueAnswer && leftTime <= 5) {
         leftTime = 0;
     }
+
+    if (answer != trueAnswer) {
+        console.log('---');
+        //console.log(btn[i]+'---');
+
+    } else {
+        console.log('+++');
+        //console.log(btn[i]+'+++');
+
+    }
+
 }
 
 //timer start
@@ -224,7 +272,7 @@ function createHiScoreList () {
         for (let i = 0; i < arrHiScore.length; i++) {
             let li = document.createElement("li"); 
             ul.appendChild(li);
-            li.textContent = `${arrHiScore[i][0]}:  ${arrHiScore[i][1]}`;
+            li.textContent = `${i + 1}. ${arrHiScore[i][0]}  -  ${arrHiScore[i][1]}`;
             
             if (i == 19) {
                 break;

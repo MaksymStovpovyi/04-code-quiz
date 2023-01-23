@@ -1,34 +1,118 @@
+body {
+    font-family: "Gill Sans", sans-serif; 
+}
+
 header {
+    margin-top: 25px;
+    padding: 0 35px;
     display: flex;
     justify-content: space-between;
+
 }
 
 #h_score {
-    height: 25px;
-    width: 75px;
-    background-color: yellow;
+   color:blueviolet;
+   font-size: 24px;
+   cursor: pointer;
 }
 
-#time {
-    font-size: 25px;
-    height: 25px;
-    width: 75px;
-    background-color: green;
+#time_div {
+    font-size: 18px;
 }
 
-section div {
-    /* padding-top: 50px; */
+#cnt {
     text-align: center;
-    margin: 50px auto;
+    margin: 100px auto;
     height: 500px;
-    width: 750px;
-    background-color: gold;
+    width: 650px;
 }
-
-
 
 .cnt_title {
-    margin-top: 45px;
+    margin-bottom: 25px;
     font-size: 28px;
-    color:blueviolet;
+}
+
+section div p {
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+.btn_start {
+    height: 35px;
+    width: 100px;
+    border-radius: 5px;
+    background-color:purple;
+    color: white;
+    font-size: 17px;
+}
+
+.qstn_wrapper {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+    width: 450px;
+}
+
+.qstn_wrapper .btn {
+    padding-left: 20px;
+    border-radius: 5px;
+    height: 45px;
+    width: 250px;
+    background-color:purple;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+}
+
+.qstn_title {
+    text-align: left;
+}
+
+.done_wrapper {
+    text-align: left;
+}
+.done_wrapper .btn {
+    height: 26px;
+    width: 85px;
+    border-radius: 5px;
+    background-color:purple;
+    color: white;
+    font-size: 14px;
+}
+
+.done_wrapper label {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.done_wrapper form input {
+    margin-right: 10px;
+    height: 22px;
+}
+
+.list_wrapper {
+    text-align: left;
+}
+
+.list_wrapper li {
+    list-style-type: none;
+    font-size: 22px;
+    background-color: rgb(225, 190, 235);
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.list_wrapper .btn {
+    margin: 15px 25px 0 0;
+    height: 35px;
+    width: 110px;
+    border-radius: 5px;
+    background-color:purple;
+    color: white;
+    font-size: 17px;
+}
+
+.btn:active {
+    background-color: rgb(223, 55, 223);
 }
