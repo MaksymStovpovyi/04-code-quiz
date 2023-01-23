@@ -2,9 +2,11 @@ let cnt = document.getElementById('cnt');
 let elemTime = document.getElementById('time');
  
 let pageIs = 'start';
-let totalTime = 6000;
+let totalTime = 30;
 let leftTime = totalTime;
 let finalScore;
+
+// Pages
 
 let pageStart = `
     <h2 class ="cnt_title" >Coding Quiz Challenge</h2>
@@ -14,7 +16,7 @@ let pageStart = `
     </p>
     <button class="btn btn_start" btn_start>Start Quiz</button>
 `;
-// 3
+// 3 true
 let qstn1 = `
     <h2 class ="cnt_title qstn_title" >Commonly used data<br> types DO Not Include:</h2>
 
@@ -24,9 +26,8 @@ let qstn1 = `
         <button class="btn" data-answer="a3">3. alerts</button><br>
         <button class="btn" data-answer="a4">4. numbers</button>
     <div>
-    <span class="answer"></span>
 `;
-// 2
+// 2 true
 let qstn2 = `
     <h2 class ="cnt_title qstn_title" >The condition in an if / else<br> statement is enclosed with _______.</h2>
 
@@ -36,9 +37,8 @@ let qstn2 = `
         <button class="btn" data-answer="a3">3. parenthesis</button><br>
         <button class="btn" data-answer="a4">4. square brackets</button>
     <div>
-    <span class="answer"></span>
 `;
-// 4
+// 4 true
 let qstn3 = `
     <h2 class ="cnt_title qstn_title" >Arrays in JavaScript can<br> be used to store _______.</h2>
 
@@ -48,7 +48,6 @@ let qstn3 = `
         <button class="btn" data-answer="a3">3. booleans</button><br>
         <button class="btn" data-answer="a4">4. all of the above</button>
     <div>
-    <span class="answer"></span>
 `;
 // 3
 let qstn4 = `
@@ -60,9 +59,8 @@ let qstn4 = `
         <button class="btn" data-answer="a3">3. quotes</button><br>
         <button class="btn" data-answer="a4">4. parenthesis</button>
     <div>
-    <span class="answer"></span>
-    `;
-// 4
+`;
+// 4 true
 let qstn5 = `
     <h2 class ="cnt_title qstn_title" >Avery useful tool used during development and debugging for printing content to the debugger is:</h2>
 
@@ -72,7 +70,6 @@ let qstn5 = `
         <button class="btn" data-answer="a3">3. for loops</button><br>
         <button class="btn" data-answer="a4">4. console.log</button>
     <div></div>
-    <span class="answer"></span>
 `;
 
 let allDone = `
@@ -87,6 +84,7 @@ let allDone = `
             <input type="submit" value="Submit" class="btn"/>
 
         </form>
+
     </div>
 `;
 
@@ -99,12 +97,12 @@ let hiScore = `
     </div>
 `;
 
-runPage(pageStart); // start function
+// start mainFunction
+runPage(pageStart); 
 
 // mainFunction
 function runPage (page) {
     cnt.innerHTML = page;
-    console.log(pageIs);
 
     //Listener for buttons 
     let btn = document.getElementsByClassName('btn');
@@ -121,48 +119,48 @@ function runPage (page) {
 
             } else if (pageIs === 'qstn1') {
 
-                drop(btn[i].dataset.answer, 'a3');
+                drop(btn[i].dataset.answer, 'a3', btn[i]);
                 
                 setTimeout(() => {
                     pageIs = "qstn2";
                     runPage(qstn2);
-                }, 1000);
+                }, 300);
                 
             } else if (pageIs === 'qstn2') {
 
-                drop(btn[i].dataset.answer, 'a2');
+                drop(btn[i].dataset.answer, 'a2', btn[i]);
 
                 setTimeout(() => {
                     pageIs = "qstn3";
                     runPage(qstn3);
-                }, 1000);
+                }, 300);
                 
             } else if (pageIs === 'qstn3') {
 
-                drop(btn[i].dataset.answer, 'a4');
+                drop(btn[i].dataset.answer, 'a4', btn[i]);
 
                 setTimeout(() => {
                     pageIs = "qstn4";
                     runPage(qstn4);
-                }, 1000);
+                }, 300);
 
             } else if (pageIs === 'qstn4') {
 
-                drop(btn[i].dataset.answer, 'a3');
+                drop(btn[i].dataset.answer, 'a3', btn[i]);
 
                 setTimeout(() => {
                     pageIs = "qstn5";
                     runPage(qstn5);
-                }, 1000);
+                }, 300);
 
             } else if (pageIs === 'qstn5') {
 
-                drop(btn[i].dataset.answer, 'a4');
+                drop(btn[i].dataset.answer, 'a4', btn[i]);
 
                 setTimeout(() => {
                     pageIs = "allDone";
                     runPage(allDone);
-                }, 1000);
+                }, 300);
 
             } else if (pageIs === 'allDone') {
                 // name from form
@@ -204,9 +202,8 @@ function runPage (page) {
     }   
 }
 
-
 // DROP
-function drop(answer, trueAnswer) {
+function drop(answer, trueAnswer, element) {
 
     if (answer != trueAnswer && leftTime > 4) {
         leftTime -= 5;
@@ -215,43 +212,39 @@ function drop(answer, trueAnswer) {
     }
 
     if (answer != trueAnswer) {
-        console.log('---');
-        //console.log(btn[i]+'---');
-
+        element.style.backgroundColor = "red";
     } else {
-        console.log('+++');
-        //console.log(btn[i]+'+++');
-
+        element.style.backgroundColor = "green";
     }
 
 }
 
 //timer start
 function startTimer() {
-        let myTimer = setInterval(() => {
+    let myTimer = setInterval(() => {
 
-            if (leftTime == 0) {
-                clearInterval(myTimer);
-                finalScore = leftTime;
-                elemTime.textContent = leftTime;
-                pageIs = "allDone";
-                runPage(allDone);
-                let yourScore = document.getElementById('yourScore');
-                yourScore.textContent = leftTime;
+        if (leftTime == 0) {
+            clearInterval(myTimer);
+            finalScore = leftTime;
+            elemTime.textContent = leftTime;
+            pageIs = "allDone";
+            runPage(allDone);
+            let yourScore = document.getElementById('yourScore');
+            yourScore.textContent = leftTime;
 
-            } else if (pageIs === "allDone") {
-                clearInterval(myTimer);
-                finalScore = leftTime;
-                elemTime.textContent = leftTime;
-                let yourScore = document.getElementById('yourScore');
-                yourScore.textContent = leftTime;
+        } else if (pageIs === "allDone") {
+            clearInterval(myTimer);
+            finalScore = leftTime;
+            elemTime.textContent = leftTime;
+            let yourScore = document.getElementById('yourScore');
+            yourScore.textContent = leftTime;
 
-            } else if (leftTime >= 0) {
-                elemTime.textContent = leftTime;
-                --leftTime;
-            }
+        } else if (leftTime >= 0) {
+            elemTime.textContent = leftTime;
+            --leftTime;
+        }
 
-        }, 1000);
+    }, 1000);
 };
 
 // the hi score page from  header
