@@ -3,10 +3,9 @@ let elemTime = document.getElementById('time');
 
 let className = 'class ="cnt_title"';
 let pageIs = 'start';
-let totalTime = 3;
+let totalTime = 60;
 let leftTime = totalTime;
 let finalScore;
-
 
 let pageStart = `
     <h2 `+ className + `>Coding Quiz Challenge</h2>
@@ -84,29 +83,6 @@ function runPage (page) {
     cnt.innerHTML = page;
     console.log(pageIs);
 
-    //timer start
-    if (pageIs == 'qstn1') {
-
-        let myTimer = setInterval(() => {
-
-            if (pageIs === "allDone") {
-                clearInterval(myTimer);
-                finalScore = leftTime;
-                elemTime.innerHTML = leftTime;
-                let yourScore = document.getElementById('yourScore');
-                yourScore.innerHTML = leftTime;
-
-            } else if (leftTime >= 0) {
-                elemTime.innerHTML = leftTime;
-                --leftTime;
-
-            } else {
-                clearInterval(myTimer);
-                elemTime.innerHTML = '';
-            }   
-        }, 1000);
-    }
-
     //Listener for buttons 
     let btn = document.getElementsByClassName('btn');
     
@@ -116,6 +92,7 @@ function runPage (page) {
 
             if (pageIs === 'start') {
 
+                startTimer();
                 pageIs = "qstn1";
                 runPage(qstn1);
 
@@ -171,20 +148,7 @@ function runPage (page) {
                 runPage(hiScore);
 
                 //  create score list
-                if (pageIs == 'hiScore') {
-                        let ul = document.getElementById('score-list');
-                        let arrHiScore = JSON.parse(localStorage.getItem('hiScore'));
-
-                        for (let i = 0; i < arrHiScore.length; i++) {
-                            let li = document.createElement("li"); 
-                            ul.appendChild(li);
-                            li.textContent = `${arrHiScore[i][0]}:  ${arrHiScore[i][1]}`;
-                            
-                            if (i == 19) {
-                                break;
-                            }
-                        }
-                    }
+                createHiScoreList();
 
             } else if (pageIs === 'hiScore') {
 
@@ -192,8 +156,10 @@ function runPage (page) {
                 if (e.target.textContent == 'Clear score' && localStorage.hiScore) {
                     let ul = document.getElementById('score-list').remove();
                     localStorage.clear();
+                //for next page
                 } else if (e.target.textContent == 'Go back') {
                     leftTime = totalTime;
+                    elemTime.textContent = '';
                     pageIs = "start";
                     runPage(pageStart);
                 }
@@ -202,9 +168,67 @@ function runPage (page) {
     }   
 }
 
+
 // DROP
 function drop(answer, trueAnswer) {
     if (answer != trueAnswer && leftTime > 4) {
         leftTime -= 5;
+    } else if (answer != trueAnswer && leftTime <= 5) {
+        leftTime = 0;
+    }
+}
+
+//timer start
+function startTimer() {
+        let myTimer = setInterval(() => {
+
+            if (leftTime == 0) {
+                clearInterval(myTimer);
+                finalScore = leftTime;
+                elemTime.textContent = leftTime;
+                pageIs = "allDone";
+                runPage(allDone);
+                let yourScore = document.getElementById('yourScore');
+                yourScore.textContent = leftTime;
+
+            } else if (pageIs === "allDone") {
+                clearInterval(myTimer);
+                finalScore = leftTime;
+                elemTime.textContent = leftTime;
+                let yourScore = document.getElementById('yourScore');
+                yourScore.textContent = leftTime;
+
+            } else if (leftTime >= 0) {
+                elemTime.textContent = leftTime;
+                --leftTime;
+            }
+
+        }, 1000);
+};
+
+// the hi score page from  header
+let elemHiScore = document.getElementById('h_score');
+
+elemHiScore.addEventListener('click', () => {
+    pageIs = "hiScore";
+    runPage(hiScore);
+    createHiScoreList();
+});
+
+// create hiScore list
+function createHiScoreList () {
+    if (pageIs == 'hiScore') {
+        let ul = document.getElementById('score-list');
+        let arrHiScore = JSON.parse(localStorage.getItem('hiScore'));
+
+        for (let i = 0; i < arrHiScore.length; i++) {
+            let li = document.createElement("li"); 
+            ul.appendChild(li);
+            li.textContent = `${arrHiScore[i][0]}:  ${arrHiScore[i][1]}`;
+            
+            if (i == 19) {
+                break;
+            }
+        }
     }
 }

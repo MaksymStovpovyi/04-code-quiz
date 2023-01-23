@@ -3,7 +3,7 @@ header {
     justify-content: space-between;
 }
 
-.h_score {
+#h_score {
     height: 25px;
     width: 75px;
     background-color: yellow;
