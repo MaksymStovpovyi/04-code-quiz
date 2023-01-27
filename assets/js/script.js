@@ -168,7 +168,7 @@ function runPage (page) {
                 let elem = form.elements.text;
 
                 // array [name and score]
-                let fromForm = [elem.value, finalScore];
+                let fromForm = [elem.value, finalScore * 22];
                 
                 if (localStorage.hiScore) {
                     let fromLS = JSON.parse(localStorage.getItem('hiScore'));
@@ -230,14 +230,14 @@ function startTimer() {
             pageIs = "allDone";
             runPage(allDone);
             let yourScore = document.getElementById('yourScore');
-            yourScore.textContent = leftTime;
+            yourScore.textContent = leftTime * 22;
 
         } else if (pageIs === "allDone") {
             clearInterval(myTimer);
             finalScore = leftTime;
             elemTime.textContent = leftTime;
             let yourScore = document.getElementById('yourScore');
-            yourScore.textContent = leftTime;
+            yourScore.textContent = leftTime * 22;
 
         } else if (leftTime >= 0) {
             elemTime.textContent = leftTime;
