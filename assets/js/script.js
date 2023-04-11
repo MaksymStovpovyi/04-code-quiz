@@ -2,7 +2,7 @@ let cnt = document.getElementById('cnt');
 let elemTime = document.getElementById('time');
  
 let pageIs = 'start';
-let totalTime = 30;
+let totalTime = 60;
 let leftTime = totalTime;
 let finalScore;
 
@@ -51,7 +51,7 @@ let qstn3 = `
 `;
 // 3
 let qstn4 = `
-    <h2 class ="cnt_title qstn_title" >String values must be enclosed within<br> _______ when being assigned to variables.</h2>
+    <h2 class ="cnt_title qstn_title" >String values must be enclosed within<br> _______ when being assigned to letiables.</h2>
 
     <div class="qstn_wrapper">
         <button class="btn" data-answer="a1">1. commas</button><br>
